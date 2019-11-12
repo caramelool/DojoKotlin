@@ -2,6 +2,7 @@ package com.lcmobile.kotlinbestpractices
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -40,7 +41,8 @@ class MainActivity : AppCompatActivity(), ViewModelInterface<MainViewModel> {
         }
 
         fab.setOnClickListener {
-            viewModel.generateMagicNumber()
+//            viewModel.generateMagicNumber()
+            viewModel.request()
         }
     }
 
@@ -48,6 +50,9 @@ class MainActivity : AppCompatActivity(), ViewModelInterface<MainViewModel> {
         when (state) {
             is MainViewState.MagicNumberState -> handlerMagicNumberState(state)
             is MainViewState.Loading -> handlerLoading(state)
+            is MainViewState.StringState -> {
+                Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
