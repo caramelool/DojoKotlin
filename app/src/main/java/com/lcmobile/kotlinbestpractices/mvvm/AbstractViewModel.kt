@@ -12,10 +12,8 @@ abstract class AbstractViewModel : ViewModel(), LifecycleObserver {
 
     val mediator = MediatorLiveData<ViewState>()
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    private fun restoreMediator() {
-        liveDataList
-            .mapNotNull { it.value }
+    fun restoreMediator() {
+        liveDataList.mapNotNull { it.value }
             .filterIsInstance<ViewState>()
             .forEach { mediator.value = it }
     }

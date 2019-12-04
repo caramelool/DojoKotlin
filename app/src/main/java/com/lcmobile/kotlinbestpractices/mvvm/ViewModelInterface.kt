@@ -14,7 +14,9 @@ interface ViewModelInterface<T : AbstractViewModel> {
         val observer = Observer<ViewState> {
             it?.let(::onStateChanged)
         }
+        viewModel.mediator.value = null
         viewModel.mediator.observe(lifecycleOwner, observer)
+        viewModel.restoreMediator()
     }
 
 }
